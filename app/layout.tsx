@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import CanvasTitlePanel from "@/components/canvas-title-panel";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <header className="w-full h-14 leading-14 flex items-center justify-between px-8 bg-white">
+          <h1 className="text-3xl">Alang</h1>
+          <ul className="flex">
+            <li>123</li>
+            <li>123</li>
+            <li>123</li>
+          </ul>
+        </header>
+        <CanvasTitlePanel></CanvasTitlePanel>
+        <div>{children}</div>
       </body>
     </html>
   );

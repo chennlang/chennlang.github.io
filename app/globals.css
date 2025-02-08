@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #c9cfd6;
+  --foreground: #24292f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,5 +17,5 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "LXGW WenKai Screen R",Calibri,Arial,sans-serif;
 }
