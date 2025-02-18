@@ -1,13 +1,12 @@
-import CanvasTitlePanel from "@/components/canvas-title-panel";
-import { getAllPostIds, getAllPostList } from "@/utils/post";
-import Link from "next/link";
+import { getAllPostList } from "@/utils/post";
 import Pagination from "@/components/pagination";
+import CategorySidebar from "@/components/category-sidebar";
+import PostList from "@/components/post-list";
+import PageLayout from "@/components/page-layout";
 
-// 添加静态路径生成
 export async function generateStaticParams() {
-  const ids = await getAllPostIds();
-  const totalPages = Math.ceil(ids.length / 10);
-  console.log(totalPages, "totalPages");
+  const posts = await getAllPostList();
+  const totalPages = Math.ceil(posts.length / 10);
 
   return Array.from({ length: totalPages }, (_, i) => ({
     id: (i + 1).toString(),
@@ -16,8 +15,12 @@ export async function generateStaticParams() {
 
 const Page = async ({ params }: { params: any }) => {
   const currentPage = Number(params.id) || 1;
-  const postsPerPage = 10; // 每页显示的文章数量
-  const posts = await getAllPostList(); // 获取所有文章
+  const postsPerPage = 10;
+  const posts = await getAllPostList();
+  const categories = Array.from(
+    new Set(posts.flatMap((post) => post.frontmatter.categories || []))
+  );
+
   const totalPages = Math.ceil(posts.length / postsPerPage);
   const currentPosts = posts.slice(
     (currentPage - 1) * postsPerPage,
@@ -25,30 +28,13 @@ const Page = async ({ params }: { params: any }) => {
   );
 
   return (
-    <div>
-      <CanvasTitlePanel></CanvasTitlePanel>
-      <div className="mx-8 max-w-[950px] lg:mx-auto mt-8">
-        <ul className="w-full">
-          {currentPosts.map((m) => (
-            <Link
-              key={m.frontmatter.title}
-              className="w-full block bg-white p-4 mt-5 shadow-md"
-              href={`/post/${m.id}`}
-            >
-              <article>
-                <h1 className="text-2xl font-bold my-4">
-                  {m.frontmatter.title}
-                </h1>
-                <p className="mt-4 text-wrap break-words leading-7 text-stone-600">
-                  【{m.frontmatter.date}】{m.frontmatter.summary}
-                </p>
-              </article>
-            </Link>
-          ))}
-        </ul>
+    <PageLayout>
+      <CategorySidebar categories={categories} posts={posts} />
+      <div className="flex-grow mx-4">
+        <PostList posts={currentPosts} />
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

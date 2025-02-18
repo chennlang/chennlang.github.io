@@ -2,7 +2,10 @@ import { promises as fs } from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
-import html from "remark-html";
+import remarkRehype from 'remark-rehype';
+import rehypeStringify from 'rehype-stringify';
+import rehypeSlug from 'rehype-slug';
+import rehypeHighlight from 'rehype-highlight';
 
 const postsDirectory = path.join(process.cwd(), "posts");
 
@@ -23,13 +26,21 @@ export async function getAllPostIds(): Promise<{ id: string }[]> {
 // 获取文章内容
 export async function getPost(id: string) {
     const markdownWithMeta = await fs.readFile(
-    path.join("posts", id + ".md"),
-    "utf-8"
+      path.join("posts", id + ".md"),
+      "utf-8"
     );
     const { data: frontmatter, content } = matter(markdownWithMeta);
 
-    const processedContent = await remark().use(html).process(content);
+    const processedContent = await remark()
+      .use(remarkRehype)
+      .use(rehypeSlug)
+      .use(rehypeHighlight)  // 简化配置，使用默认选项
+      .use(rehypeStringify)
+      .process(content);
+      
     const contentHtml = processedContent.toString();
+
+    frontmatter.categories = Array.isArray(frontmatter.categories) ? frontmatter.categories : [frontmatter.categories || "Default"]
 
     return {
         id,

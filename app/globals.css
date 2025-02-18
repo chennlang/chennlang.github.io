@@ -4,7 +4,7 @@
 
 :root {
   --background: #c9cfd6;
-  --foreground: #24292f;
+  --foreground: #24292FCC;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,8 +14,23 @@
   }
 }
 
+@font-face {
+  font-family: 'LXGWWenKai';
+  src: url('/fonts/LXGWWenKaiScreen.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "LXGW WenKai Screen R",Calibri,Arial,sans-serif;
+  font-family: "LXGWWenKai",Calibri,Arial,sans-serif;
+}
+
+a:hover {
+  color: rgba(0, 0, 0, .8);
+}
+
+b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a {
+  transition: all .2s ease;
 }

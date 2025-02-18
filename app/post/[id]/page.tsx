@@ -1,5 +1,7 @@
 import { getAllPostIds, getPost } from "@/utils/post";
 import Comments from "@/components/comments";
+import ImagePreview from "@/components/image-preview";
+import "./post.css";
 
 export async function generateStaticParams() {
   const posts = await getAllPostIds();
@@ -14,21 +16,34 @@ const Post = async ({ params }: any) => {
       label: k,
       value: frontmatter[k],
     }))
-    .filter((m) => !["title"].includes(m.label));
+    .filter((m) => !["title", "summary"].includes(m.label));
+
   return (
-    <div>
-      <h1 className="text-2xl mb-4 font-bold">{frontmatter.title}</h1>
-      <p className="flex flex-wrap">
+    <div className="max-w-4xl mx-auto">
+      <h1 className="text-3xl mb-6 font-bold text-gray-900">
+        {frontmatter.title}
+      </h1>
+      <div className="flex flex-wrap gap-4 mb-8 text-sm">
         {metaList.map((item) => (
-          <span key={item.label} className="text-gray-600 mr-4">
-            <label>{item.label}: </label> {item.value}
+          <span
+            key={item.label}
+            className="text-gray-600 bg-gray-100 px-3 py-1 rounded"
+          >
+            <label className="font-medium">{item.label}: </label>
+            <span>
+              {Array.isArray(item.value) ? item.value.join(", ") : item.value}
+            </span>
           </span>
         ))}
-      </p>
-      <div className="mt-4" dangerouslySetInnerHTML={{ __html: contentHtml }} />
-      <div className="mt-10">
+      </div>
+      <div
+        className="mt-4 cl-post prose prose-lg dark:prose-invert max-w-none"
+        dangerouslySetInnerHTML={{ __html: contentHtml }}
+      />
+      <div className="mt-16">
         <Comments />
       </div>
+      <ImagePreview />
     </div>
   );
 };

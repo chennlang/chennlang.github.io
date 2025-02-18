@@ -1,0 +1,160 @@
+@import 'highlight.js/styles/github-dark.css';
+
+/* 基础容器样式 */
+.kindle-container {
+  @apply max-w-3xl mx-auto px-6 md:px-12 py-12;
+  background-color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.cl-post {
+  @apply text-gray-900 leading-relaxed;
+  font-size: 16px;
+  line-height: 1.75;
+  
+  /* 标题层级 */
+  h1, h2, h3, h4 {
+    @apply font-semibold text-gray-800;
+    margin: 2rem 0 1rem;
+  }
+  
+  h1 { 
+    font-size: 2rem; 
+    line-height: 1.2; 
+  }
+  
+  h2 { 
+    font-size: 1.75rem; 
+    @apply border-b border-gray-200 pb-2;
+  }
+  
+  h3 { 
+    font-size: 1.5rem; 
+  }
+  
+  h4 {
+    font-size: 1.25rem;
+  }
+  
+  /* 段落样式 */
+  p {
+    margin: 1rem 0;
+    @apply text-justify hyphens-auto;
+  }
+  
+  /* 列表样式 */
+  ul, ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+  }
+  
+  ul { @apply list-disc; }
+  ol { @apply list-decimal; }
+  
+  li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+  
+  /* 链接样式 */
+  a {
+    @apply text-gray-900 no-underline border-b border-dotted border-gray-500
+           transition-all duration-200;
+  }
+  
+  a:hover {
+    @apply border-solid border-gray-900;
+  }
+  
+  /* 引用样式 */
+  blockquote {
+    @apply pl-4 border-l-4 border-gray-300 my-4 text-gray-500 italic;
+    margin: 1.5rem 0;
+  }
+  
+  /* `` 块 */
+  :not(pre) > code {
+    background-color: #f8f8f8;
+    @apply px-2 py-0.5 rounded text-gray-800 text-sm;
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* 图片样式 */
+  img {
+    @apply max-w-full my-6 rounded;
+    border: 1px solid #e0e0e0;
+  }
+  
+  /* 表格样式 */
+  table {
+    @apply w-full my-6 border-collapse;
+    border: 1px solid #e0e0e0;
+  }
+  
+  th, td {
+    @apply border border-gray-200 px-4 py-2 text-left;
+  }
+  
+  th {
+    @apply bg-gray-50 font-semibold;
+  }
+  
+  /* 分割线样式 */
+  hr {
+    @apply my-8 border-gray-200;
+    border-top-width: 1px;
+  }
+}
+
+/* 暗色模式 */
+@media (prefers-color-scheme: dark) {
+  .kindle-container {
+    background-color: #1a1a1a;
+  }
+  
+  .cl-post {
+    @apply text-gray-200;
+    
+    h1, h2, h3, h4 {
+      @apply text-gray-100;
+    }
+    
+    h2 {
+      @apply border-gray-700;
+    }
+    
+    a {
+      @apply text-gray-200 border-gray-500;
+    }
+    
+    a:hover {
+      @apply border-gray-300;
+    }
+    
+    blockquote {
+      @apply border-gray-700 text-gray-400;
+    }
+    
+    pre, code, :not(pre) > code {
+      background-color: #2d2d2d;
+      border-color: #404040;
+      @apply text-gray-200;
+    }
+    
+    img, table {
+      border-color: #404040;
+    }
+    
+    th {
+      @apply bg-gray-800;
+    }
+    
+    th, td {
+      @apply border-gray-700;
+    }
+    
+    hr {
+      @apply border-gray-700;
+    }
+  }
+}

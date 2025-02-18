@@ -48,7 +48,7 @@ export default function Pagination({
               <Link
                 href={`/page/${page}`}
                 className={`text-2xl cursor-pointer ${
-                  page === currentPage ? "text-blue-500" : ""
+                  page === currentPage ? "text-black" : ""
                 }`}
               >
                 {page}
