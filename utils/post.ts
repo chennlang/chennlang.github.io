@@ -34,7 +34,7 @@ export async function getPost(id: string) {
     const processedContent = await remark()
       .use(remarkRehype)
       .use(rehypeSlug)
-      .use(rehypeHighlight)  // 简化配置，使用默认选项
+      .use(rehypeHighlight)
       .use(rehypeStringify)
       .process(content);
       

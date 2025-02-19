@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 个人博客模板
 
-## Getting Started
+一个简约而优雅的个人博客模板，基于 Next.js 14 构建，支持 Markdown 文章编写，自动生成静态页面。
 
-First, run the development server:
+## ✨ 特性
+
+- 🚀 基于 Next.js 14 构建
+- 📝 Markdown 文章支持
+- 🎨 优雅的阅读体验
+- 🌙 自动暗色模式
+- 📱 响应式设计
+- 🔍 文章分类功能
+- 🖼️ 图片预览功能
+- ⚡️ 代码高亮支持
+
+## 🚀 快速开始
+
+1. 克隆项目
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+2. 安装依赖
+
+```bash
+npm install
+# 或
+yarn install
+```
+
+3. 配置环境变量
+
+复制 `.env.example` 到 `.env`：
+
+```bash
+cp .env.example .env
+```
+
+根据需要修改 `.env` 文件：
+
+```env
+SITE_NAME=我的博客
+SITE_DESCRIPTION=分享技术与生活
+AUTHOR_NAME=作者名
+AUTHOR_AVATAR=/avatar.jpg
+```
+
+4. 启动开发服务器
 
 ```bash
 npm run dev
-# or
+# 或
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📝 写作指南
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+在 `posts` 目录下创建 `.md` 文件即可开始写作。每篇文章需要包含 frontmatter 头部信息：
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```markdown
+---
+title: "文章标题"
+date: "2024-03-20"
+categories: ["技术", "生活"] # 可以是单个分类或数组
+summary: "文章摘要，会显示在列表页面"
+---
 
-## Learn More
+这里是文章正文内容...
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Frontmatter 字段说明
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| 字段       | 说明     | 是否必填 | 类型                |
+| ---------- | -------- | -------- | ------------------- |
+| title      | 文章标题 | 是       | string              |
+| date       | 发布日期 | 是       | string (YYYY-MM-DD) |
+| categories | 文章分类 | 否       | string 或 string[]  |
+| summary    | 文章摘要 | 是       | string              |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ 自定义主题
 
-## Deploy on Vercel
+主题相关的样式文件：
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `app/globals.css`: 全局样式
+- `app/post/[id]/post.css`: 文章页面样式
+- `tailwind.config.js`: Tailwind 配置
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📦 构建部署
+
+构建静态页面：
+
+```bash
+npm run build
+# 或
+yarn build
+```
+
+构建完成后，`out` 目录包含所有静态文件，可以部署到任何静态托管服务。
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+## 📄 许可
+
+MIT License

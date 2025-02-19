@@ -32,6 +32,10 @@ export default function RootLayout({
         <Header></Header>
         {/* <CanvasTitlePanel></CanvasTitlePanel> */}
         <div className="w-full">{children}</div>
+        <script
+          async
+          src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
+        ></script>
       </body>
     </html>
   );

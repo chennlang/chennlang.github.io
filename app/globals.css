@@ -28,7 +28,7 @@ body {
 }
 
 a:hover {
-  color: rgba(0, 0, 0, .8);
+  @apply border-gray-900;
 }
 
 b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a {

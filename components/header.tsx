@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const Header = () => {
+  const LINKS = JSON.parse(process.env.NEXT_PUBLIC_LINKS || "[]");
   return (
     <header className="sticky top-0 left-0 z-10 w-full h-20 leading-20 flex items-center justify-between px-8 bg-white">
       <Link className="text-3xl" href="/">
@@ -14,12 +15,16 @@ const Header = () => {
       </Link>
 
       <ul className="flex gap-4">
-        {/* <Link className="font-bold" href="/about">
-          Github
-        </Link>
-        <Link className="font-bold" href="/about">
-          掘金
-        </Link> */}
+        {LINKS.map((link: { label: string; src: string }) => (
+          <Link
+            target="_black"
+            className="font-bold"
+            href={link.src}
+            key={link.label}
+          >
+            {link.label}
+          </Link>
+        ))}
         <Link className="font-bold" href="/about">
           About
         </Link>
