@@ -1,12 +1,9 @@
 export interface PostFrontmatter {
-  title: string;
-  date: string;
-  summary: string;
-  categories?: string[];
+    [key: string]: any;
 }
 
 export interface PostData {
   id: string;
   frontmatter: PostFrontmatter;
-  content: string;
+  contentHtml: string;
 } 

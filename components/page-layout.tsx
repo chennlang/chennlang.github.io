@@ -1,5 +1,3 @@
-import CanvasTitlePanel from "./canvas-title-panel";
-
 interface PageLayoutProps {
   children: React.ReactNode;
 }

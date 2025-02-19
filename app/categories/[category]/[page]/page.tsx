@@ -4,6 +4,8 @@ import CategorySidebar from "@/components/category-sidebar";
 import PostList from "@/components/post-list";
 import PageLayout from "@/components/page-layout";
 
+type Params = Promise<{ category: string; page: string }>;
+
 export async function generateStaticParams() {
   const posts = await getAllPostList();
   const categories = Array.from(
@@ -27,21 +29,18 @@ export async function generateStaticParams() {
   return params;
 }
 
-const CategoryPage = async ({
-  params,
-}: {
-  params: { category: string; page: string };
-}) => {
+async function CategoryPage({ params }: { params: Params }) {
+  const { page, category } = await params;
   const posts = await getAllPostList();
   const categories = Array.from(
     new Set(posts.flatMap((post) => post.frontmatter.categories || []))
   );
 
-  const currentPage = Number(params.page);
+  const currentPage = Number(page);
   const postsPerPage = 10;
 
   const filteredPosts = posts.filter((post) =>
-    post.frontmatter.categories?.includes(params.category)
+    post.frontmatter.categories?.includes(category)
   );
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
@@ -55,18 +54,14 @@ const CategoryPage = async ({
       <CategorySidebar
         categories={categories}
         posts={posts}
-        currentCategory={params.category}
+        currentCategory={category}
       />
       <div className="flex-grow mx-4">
         <PostList posts={currentPosts} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          basePath={`/categories/${encodeURIComponent(params.category)}`}
-        />
+        <Pagination currentPage={currentPage} totalPages={totalPages} />
       </div>
     </PageLayout>
   );
-};
+}
 
 export default CategoryPage;

@@ -41,7 +41,7 @@ export async function getPost(id: string) {
     const contentHtml = processedContent.toString();
 
     frontmatter.categories = Array.isArray(frontmatter.categories) ? frontmatter.categories : [frontmatter.categories || "Default"]
-
+    
     return {
         id,
         contentHtml,

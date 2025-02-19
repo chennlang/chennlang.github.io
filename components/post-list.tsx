@@ -23,7 +23,7 @@ export default function PostList({ posts }: PostListProps) {
             </p>
             {post.frontmatter.categories && (
               <div className="mt-4 flex gap-2">
-                {post.frontmatter.categories.map((cat) => (
+                {post.frontmatter.categories.map((cat: string) => (
                   <span
                     key={cat}
                     className="px-2 py-1 text-sm bg-gray-100 rounded"
