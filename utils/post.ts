@@ -18,7 +18,8 @@ export async function getAllPostIds(): Promise<{ id: string }[]> {
     return fileNames
       .filter((fileName) => fileName.endsWith(".md")) // 只处理 .md 文件
       .map((fileName) => ({
-        id: fileName.replace(/\.md$/, ""), // 去掉 .md 后缀
+        // 使用捕获组提取文件名，避免向后断言，兼容 iOS 16.3 以下环境
+        id: fileName.match(/^(.+)\.md$/)[1], // 去掉 .md 后缀
       }));
   }
 
